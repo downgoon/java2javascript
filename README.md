@@ -1,4 +1,4 @@
-# 从java到javascript
+# 从``java``到``javascript``的快速入门
 
 本文专门为学过C语言的Java程序员，快速理解javascript语言的重要概念，量身定做。笔者对javascript其他实现面向对象的方式，尽可能保持克制，尽可能让javascript的面向对象风格与java对标起来，帮助java程序员快速掌握javascript面向对象。
 
@@ -6,7 +6,7 @@
 
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
-- [从java到javascript](#从java到javascript)
+- [从``java``到``javascript``的快速入门](#从java到javascript的快速入门)
 	- [1. 从函数开始](#1-从函数开始)
 		- [弱类型](#弱类型)
 		- [``function``关键字](#function关键字)
@@ -149,7 +149,7 @@ JS的函数，还可以不用起名字，用``function``声明后，立即赋值
 
 前面我们看到，函数可以赋值给一个变量（函数指针），然后通过函数指针可以调用函数：
 
->``` js
+``` js
 var f = sumlen;  // 函数赋值给变量
 f('hello', 'world');  // 按函数指针调用
 ```
