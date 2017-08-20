@@ -4,6 +4,8 @@
 
 之所以有必要讲解下``javascript``，是因为如今的``javascript``是全能（全栈）的，除了运行于浏览器；还可以借助``node``运行到服务器；还可以借助``electron``这类框架，开发桌面程序；还可以``React-Native``，开发手机程序；还有在类似``cassandra``服务器里面用``javascript``做嵌入式脚本语言。类似这样的变化，还在不断发生。
 
+文章用到的代码均托管在 [github](https://github.com/downgoon/java2javascript) 的 [downgoon/java2javascript](https://github.com/downgoon/java2javascript) 上，可通过[issue](https://github.com/downgoon/java2javascript/issues)给我反馈 。
+
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
 - [从``java``到``javascript``的快速入门](#从java到javascript的快速入门)
