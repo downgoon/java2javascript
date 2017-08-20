@@ -1,0 +1,12 @@
+var x;
+console.log('x type: ' + typeof(x));
+x = 'helloworld';
+console.log('x type: ' + typeof(x));
+x = 3.14;
+console.log('x type: ' + typeof(x));
+x = true;
+console.log('x type: ' + typeof(x));
+x = ['helloworld', 3.14, true];
+console.log('x type: ' + typeof(x));
+x = null;
+console.log('x type: ' + typeof(x));
