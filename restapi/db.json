@@ -1,0 +1,24 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "ECMAScript 6入门",
+      "author": "阮一峰"
+    },
+    {
+      "id": 2,
+      "title": "未来世界的幸存者",
+      "author": "阮一峰"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
