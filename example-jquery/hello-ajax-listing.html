@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>jquery: ajax get</title>
+    <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js">
+
+    </script>
+    <script>
+        $(document).ready(function () {
+
+            $(".action-ui").click(function () {
+                $.ajax({
+                    url: 'http://localhost:3000/posts',
+                    type: 'GET',
+                    async: true,
+                    success: function (data) {
+                        for (i = 0; i < data.length; i++) {
+                            console.info('a[%d]=%s', i, JSON.stringify(data[i]));
+                            $("#article").append('<li>').append(data[i].title).append('</li>');
+                        }
+                        $(".content").css("background-color", "red");
+                    }
+                });
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+
+    <div class="content">
+        <ul id="article">
+        </ul>
+    </div>
+
+    <button class="action-ui">执行Ajax</button>
+
+</body>
+
+</html>
