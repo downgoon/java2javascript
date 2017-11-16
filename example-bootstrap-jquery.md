@@ -1,8 +1,31 @@
 # 基于``bootstrap``和``jQuery``开始前端编程
 
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+- [基于``bootstrap``和``jQuery``开始前端编程](#基于bootstrap和jquery开始前端编程)
+	- [实验需求描述](#实验需求描述)
+	- [后端API服务器](#后端api服务器)
+	- [基于bootstrap制作页面](#基于bootstrap制作页面)
+		- [bootstrap 简介](#bootstrap-简介)
+		- [生成实验页面](#生成实验页面)
+		- [其他辅助工具](#其他辅助工具)
+	- [jQuery](#jquery)
+		- [通用AJAX请求](#通用ajax请求)
+		- [jQuery选择器](#jquery选择器)
+		- [jQuery 操作DOM](#jquery-操作dom)
+	- [如何运行](#如何运行)
+		- [启动 REST API服务](#启动-rest-api服务)
+		- [启动页面服务器](#启动页面服务器)
+
+<!-- /TOC -->
+
 ## 实验需求描述
 
 从一个``RESTful API``服务器，拉取``/posts``的JSON信息，展现在一个HTML的Table里面。
+
+![](assets/assets/bootstrap-jquery-listing.png)
+
+如上图所示，当点击“加载”按钮后，会从后端读取JSON数据，并展示在列表中（不同行显示不同的样式）。
 
 ## 后端API服务器
 
@@ -72,7 +95,7 @@ $ curl -X GET -i http://localhost:3000/posts
 
 ![](assets/bootstrap-layoutit-page.png)
 
-最终的页面见：[example-bootstrap/hello-bootstrap-listing.html](example-bootstrap/hello-bootstrap-listing.html)
+最终的页面见：[example-bootstrap-jquery/hello-bootstrap-listing.html](example-bootstrap-jquery/hello-bootstrap-listing.html)
 
 **注意**
 >下载下来的页面，不是完整的HTML页面，只有Body部分。我们可以从“菜鸟教程网”找一个``bootstrap``样例，并把body替换掉。比如：[菜鸟教程网的BootStrap 缩略图样例](http://www.runoob.com/bootstrap/bootstrap-thumbnails.html)。
@@ -109,17 +132,29 @@ $ curl -X GET -i http://localhost:3000/posts
 ``ajax``通用请求：
 
 ``` javascript
-$.ajax({
-    url: 'http://localhost:3000/posts',
-    type: 'GET',
-    async: true,
-    success: function (data) {
-        for (i = 0; i < data.length; i++) {
-            console.info('a[%d]=%s', i, JSON.stringify(data[i]));
-            $("#article").append('<li>').append(data[i].title).append('</li>');
+$("#btnLoad").click(function () {
+    $.ajax({
+        url: 'http://localhost:3000/posts',
+        type: 'GET',
+        async: true,
+        success: function (data) { // 请求成功时的异步回调
+            if (data != null && data.length > 0) {
+                $(".table tbody").empty(); // remove previous items
+                for (i = 0; i < data.length; i++) {
+                    console.info('a[%d]=%s', i, JSON.stringify(data[i])); // 调试日志
+                    var trow = "";
+                    trow = trow.concat('<tr class="').concat(rowStyle(i)).concat('">');
+                    trow += ('<td>' + data[i].id + '</td>');
+                    trow += ('<td>' + data[i].title + '</td>');
+                    trow += ('<td>' + data[i].author + '</td>');
+                    trow += '</tr>';
+
+                    $(".table tbody").append(trow); // DOM 操作
+                }
+                $(".table thead").css("background-color", "gray"); // table header
+            }
         }
-        $(".content").css("background-color", "red");
-    }
+    });
 });
 ```
 
@@ -130,7 +165,56 @@ $.ajax({
 
 ### jQuery选择器
 
-``jQuery``选择器，跟``CSS``的语法是一样的：用``.class``表示``class``选择；用``#id``表示``id``选择。
+``jQuery``选择器，跟``CSS``的语法是一样的：用``.class``表示``class``选择；用``#id``表示``id``选择；用元素名选择元素，比如``button``就选择按钮元素。
 
+当然它还可以支持“层次选择”，类似我们行政区域的“浙江省 杭州市”这种。
 
-## 智能感知补全
+``` javascript
+$(".table thead").css("background-color", "gray"); // table header
+```
+
+表示对``class``为``table``的元素下的``thead``类型的元素，并把它的背景色样式设置为灰色。被选中的HTML是：
+
+``` html
+<div class="col-md-12">
+    <table class="table">
+        <thead>
+          <tr><th># 编号</th><th>标题</th></tr>
+        </thead>
+        ...
+</div>
+```
+
+### jQuery 操作DOM
+
+- 追加元素
+
+``` javascript
+$(".table tbody").append(trow); // DOM 操作
+```
+
+- 修改样式
+
+``` javascript
+$(".table thead").css("background-color", "gray"); // table header
+```
+
+## 如何运行
+
+### 启动 REST API服务
+
+``` bash
+$ cd java2javascript/restapi
+$ json-server db.json
+```
+
+此时可以在浏览器访问：http://localhost:3000/posts
+
+### 启动页面服务器
+
+``` bash
+$ cd java2javascript
+$ http-server .
+```
+
+然后在浏览器中访问：http://localhost:8080/example-bootstrap-jquery/hello-bootstrap-listing.html
