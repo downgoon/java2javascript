@@ -23,7 +23,7 @@
 
 从一个``RESTful API``服务器，拉取``/posts``的JSON信息，展现在一个HTML的Table里面。
 
-![](assets/assets/bootstrap-jquery-listing.png)
+![](assets/bootstrap-jquery-listing.png)
 
 如上图所示，当点击“加载”按钮后，会从后端读取JSON数据，并展示在列表中（不同行显示不同的样式）。
 
