@@ -3,17 +3,38 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Bootstrap 实例 - 标签页（Tab）插件</title>
-    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>JavaScript实战开发</title>
+    <link rel="stylesheet" href="/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script>
+        function rowStyle(rn) {
+            var r = rn % 4;
+            var clsName = "";
+            switch (r) {
+                case 0:
+                    clsName = "active";
+                    break;
+                case 1:
+                    clsName = "success";
+                    break;
+                case 2:
+                    clsName = "warning";
+                    break;
+                default:
+                    clsName = "danger";
+                    break;
+            }
+            return clsName;
+        }
+    </script>
 
     <script>
         $(document).ready(function () {
 
             // ajax loading
             $("#btnLoad").click(function () {
-                alert('按钮被点击...');
                 $.ajax({
                     url: 'http://localhost:3000/posts',
                     type: 'GET',
@@ -23,9 +44,8 @@
                             $(".table tbody").empty(); // remove previous items
                             for (i = 0; i < data.length; i++) {
                                 console.info('a[%d]=%s', i, JSON.stringify(data[i]));
-
                                 var trow = "";
-                                trow += '<tr>';
+                                trow = trow.concat('<tr class="').concat(rowStyle(i)).concat('">');
                                 trow += ('<td>' + data[i].id + '</td>');
                                 trow += ('<td>' + data[i].title + '</td>');
                                 trow += ('<td>' + data[i].author + '</td>');
@@ -33,14 +53,18 @@
 
                                 $(".table tbody").append(trow);
                             }
-                            // $(".table tbody").css("background-color", "gray");
+                            $(".table thead").css("background-color", "gray"); // table header
                         }
                     }
                 });
             });
 
+            // clean table handler
+            $("#btnClean").click(function() {
+                $(".table tbody").empty();
+            });
 
-
+            // 
         });
     </script>
 
@@ -51,42 +75,42 @@
 
     <div class="container-fluid">
         <div class ">
-            <div class="col-md-8 ">
+            <div class="col-md-8">
                 <h3 class="text-success text-left ">
                     热门文章
                 </h3>
             </div>
-            <div class="col-md-4 ">
+            <div class="col-md-4">
                 <div class=" ">
-                    <div class="col-md-4 ">
-                        <button type="button " class="btn btn-default " id="btnLoad ">
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-default" id="btnLoad">
 						加载
 					</button>
                     </div>
-                    <div class="col-md-4 ">
-                        <button type="button " class="btn btn-default " id="btnClean ">
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-default" id="btnClean">
 						清除
 					</button>
                     </div>
-                    <div class="col-md-4 ">
-                        <div class="btn-group ">
-                            <button class="btn btn-default ">
+                    <div class="col-md-4">
+                        <div class="btn-group">
+                            <button class="btn btn-default">
 							更多
 						</button>
-                            <button data-toggle="dropdown " class="btn btn-default dropdown-toggle ">
-							<span class="caret "></span>
+                            <button data-toggle="dropdown" class="btn btn-default dropdown-toggle">
+							<span class="caret"></span>
 						</button>
-                            <ul class="dropdown-menu ">
+                            <ul class="dropdown-menu">
                                 <li>
-                                    <a href="# ">Action</a>
+                                    <a href="#">Action</a>
                                 </li>
-                                <li class="disabled ">
-                                    <a href="# ">Another action</a>
+                                <li class="disabled">
+                                    <a href="#">Another action</a>
                                 </li>
-                                <li class="divider ">
+                                <li class="divider">
                                 </li>
                                 <li>
-                                    <a href="# ">Something else here</a>
+                                    <a href="#">Something else here</a>
                                 </li>
                             </ul>
                         </div>
